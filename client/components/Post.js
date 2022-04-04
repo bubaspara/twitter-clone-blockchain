@@ -28,11 +28,12 @@ const Post = ({
   isProfileImageNft,
   timestamp,
 }) => {
+  const [profileImageLink] = useState(avatar)
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper} key={key}>
       <div>
         <img
-          //   src={profileImageLink}
+          src={profileImageLink}
           alt={userName}
           className={
             isProfileImageNft
