@@ -13,6 +13,7 @@ import {
 } from 'react-icons/bs'
 import { useState } from 'react'
 import SidebarOption from './SidebarOption'
+import Link from 'next/link'
 
 const style = {
   wrapper: `flex-[0.7] px-8 flex flex-col`,
