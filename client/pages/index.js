@@ -16,7 +16,7 @@ const style = {
 }
 
 const Home = () => {
-  const { appStatus, connectWallet } = useContext(TwitterContext)
+  const { appStatus, connectToWallet } = useContext(TwitterContext)
 
   const app = (status = appStatus) => {
     console.log('Status ->', status)
@@ -53,11 +53,10 @@ const Home = () => {
       <Image src={metamaskLogo} height={200} width={200} />
       <div
         className={style.walletConnectButton}
-        onClick={() => connectWallet()}
+        onClick={() => connectToWallet()}
       >
         Connect Wallet
       </div>
-      <div>Connect to Wallet</div>
     </div>
   )
 
@@ -69,8 +68,9 @@ const Home = () => {
           target="_blank"
           rel="noreferrer"
           href={`https://metamask.io/download.html`}
+          className={style.loginContent}
         >
-          You must install Metamask, a <br /> virtual Ethereum wallet, in your
+          You must install Metamask, <br /> a virtual Ethereum wallet, in your
           browser.
         </a>
       </div>
