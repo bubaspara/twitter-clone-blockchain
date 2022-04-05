@@ -16,6 +16,9 @@ import SidebarOption from './SidebarOption'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { TwitterContext } from '../context/TwitterContext'
+import { customStyles } from '../lib/constants'
+import Modal from 'react-modal'
+import ProfileImageMinter from './mintingModal/ProfileImageMinter'
 
 const style = {
   wrapper: `flex-[0.7] px-8 flex flex-col`,
@@ -37,7 +40,6 @@ const Sidebar = ({ initialSelectedIcon = 'Home' }) => {
   const router = useRouter()
   const { currentAccount, currentUser } = useContext(TwitterContext)
 
-  console.log(currentUser)
   return (
     <div className={style.wrapper}>
       <div className={style.twitterIconContainer}>
@@ -123,13 +125,13 @@ const Sidebar = ({ initialSelectedIcon = 'Home' }) => {
         </div>
       </div>
 
-      {/* <Modal
+      <Modal
         isOpen={Boolean(router.query.mint)}
         onRequestClose={() => router.back()}
         style={customStyles}
       >
         <ProfileImageMinter />
-      </Modal> */}
+      </Modal>
     </div>
   )
 }

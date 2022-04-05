@@ -19,7 +19,6 @@ const Home = () => {
   const { appStatus, connectToWallet } = useContext(TwitterContext)
 
   const app = (status = appStatus) => {
-    console.log('Status ->', status)
     switch (status) {
       case 'connected':
         return userLoggedIn

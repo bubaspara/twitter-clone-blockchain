@@ -16,11 +16,6 @@ export const TwitterProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    console.log(
-      !currentAccount || appStatus === 'connected',
-      currentAccount,
-      appStatus
-    )
     if (!currentAccount && appStatus === 'connected') return
     getCurrentUserDetails(currentAccount)
     fetchTweets()
@@ -158,8 +153,6 @@ export const TwitterProvider = ({ children }) => {
       response[0].isProfileImageNft
     )
 
-    console.log('Current user ->', response)
-
     setCurrentUser({
       tweets: response[0].tweets,
       name: response[0].name,
@@ -179,6 +172,7 @@ export const TwitterProvider = ({ children }) => {
         currentUser,
         connectToWallet,
         fetchTweets,
+        getCurrentUserDetails,
       }}
     >
       {children}

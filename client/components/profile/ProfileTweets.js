@@ -23,7 +23,6 @@ const ProfileTweets = () => {
       walletAddress: currentUser.walletAddress,
       isProfileImageNft: currentUser.isProfileImageNft,
     })
-    console.log(tweets)
   }, [currentUser])
   return (
     <div className={style.wrapper}>
