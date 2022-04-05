@@ -13,7 +13,7 @@ const style = {
 const Feed = () => {
   const { tweets } = useContext(TwitterContext)
   return (
-    <div className={`${style.wrapper} no-scrollbar`}>
+    <div className={`${style.wrapper}no-scrollbar`}>
       <div className={style.header}>
         <div className={style.headerTitle}>Home</div>
         <BsStars />
