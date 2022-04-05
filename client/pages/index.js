@@ -54,7 +54,7 @@ const Home = () => {
         className={style.walletConnectButton}
         onClick={() => connectToWallet()}
       >
-        Connect Wallet
+        Connect Wallet (Rinkeby Test Network)
       </div>
     </div>
   )

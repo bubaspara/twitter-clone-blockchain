@@ -3,7 +3,7 @@ import { TwitterContext } from '../../context/TwitterContext'
 import Post from '../Post'
 
 const style = {
-  wrapper: `no-scrollbar`,
+  wrapper: `no-scrollbar y-overflow`,
   header: `sticky top-0 bg-[#15202b] z-10 p-4 flex justify-between items-center`,
   headerTitle: `text-xl font-bold`,
 }
@@ -25,7 +25,7 @@ const ProfileTweets = () => {
     })
   }, [currentUser])
   return (
-    <div className={style.wrapper}>
+    <div className={`${style.wrapper}`}>
       {tweets?.map((tweet, index) => (
         <Post
           key={index}

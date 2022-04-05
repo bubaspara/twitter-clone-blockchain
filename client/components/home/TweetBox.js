@@ -56,7 +56,7 @@ const TweetBox = () => {
         },
       ])
       .commit()
-
+    await fetchTweets()
     setTweetMessage('')
   }
   return (

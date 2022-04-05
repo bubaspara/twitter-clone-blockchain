@@ -5,14 +5,14 @@ import checkMark from '../../assets/check.png'
 import { useRouter } from 'next/router'
 
 const style = {
-  wrapper: `h-[20rem] w-[35rem] text-white bg-[#15202b] rounded-3xl p-10 flex flex-col items-center justify-center`,
+  wrapper: `h-[25rem] w-[45rem] text-white bg-[#15202b] rounded-3xl p-10 flex flex-col items-center justify-center`,
   title: `font-semibold text-xl mb-6`,
   closeButton: `mt-6 bg-white text-black px-3 py-1 rounded-full hover:bg-[#8899a6] cursor-pointer`,
 }
 
 const FinishedState = () => {
   const router = useRouter()
-  const { getCurrentUserDetails } = useContext(TwitterContext)
+  const { getCurrentUserDetails, currentUser } = useContext(TwitterContext)
 
   useEffect(() => {
     getCurrentUserDetails()
@@ -20,7 +20,14 @@ const FinishedState = () => {
 
   return (
     <div className={style.wrapper}>
-      <div className={style.title}>Minting Successful!</div>
+      <div className={style.title}>
+        {`Minting Successful! You can check your mint at `}
+        <b>
+          <a href={`https://testnets.opensea.io/${currentUser.walletAddress}`}>
+            testnets.opensea.io
+          </a>
+        </b>
+      </div>
       <Image src={checkMark} alt="checkmark" height={100} width={100} />
       <div onClick={() => router.push('/')} className={style.closeButton}>
         Close
