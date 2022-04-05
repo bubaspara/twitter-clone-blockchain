@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-// import { TwitterContext } from '../../context/TwitterContext'
+import { TwitterContext } from '../../context/TwitterContext'
 import Post from '../Post'
 
 const style = {
@@ -8,60 +8,44 @@ const style = {
   headerTitle: `text-xl font-bold`,
 }
 
-const tweets = [
-  {
-    displayName: 'Mirko',
-    userName: '0x...',
-    avatar: 'The last airbender',
-    text: 'gm',
-    isProfileImageNft: false,
-    timestamp: '2020-06-01T12:00:00.000Z',
-  },
-  {
-    displayName: 'Karlo',
-    userName: '0x...',
-    avatar: 'The last airbender',
-    text: 'gn',
-    isProfileImageNft: false,
-    timestamp: '2020-06-01T12:00:00.000Z',
-  },
-  {
-    displayName: 'Ivo',
-    userName: '0x0000000000',
-    avatar: 'The last airbender',
-    text: 'ga',
-    isProfileImageNft: false,
-    timestamp: '2020-06-01T12:00:00.000Z',
-  },
-]
-
 const ProfileTweets = () => {
+  const { currentUser } = useContext(TwitterContext)
+  const [tweets, setTweets] = useState([])
+  const [author, setAuthor] = useState({})
+
+  useEffect(() => {
+    if (!currentUser) return
+
+    setTweets(currentUser.tweets)
+    setAuthor({
+      name: currentUser.name,
+      profileImage: currentUser.profileImage,
+      walletAddress: currentUser.walletAddress,
+      isProfileImageNft: currentUser.isProfileImageNft,
+    })
+    console.log(tweets)
+  }, [currentUser])
   return (
     <div className={style.wrapper}>
       {tweets?.map((tweet, index) => (
         <Post
           key={index}
-          // displayName={
-          //   author.name === 'Unnamed'
-          //     ?
-          //      `${author.walletAddress.slice(
-          //         0,
-          //         4
-          //       )}...${author.walletAddress.slice(41)}`
-          //     : author.name
-          // }
-          // userName={`${author.walletAddress.slice(
-          //   0,
-          //   4
-          // )}...${author.walletAddress.slice(41)}`}
-          displayName="Mirko"
-          userName={'Username'}
-          text={tweet.text}
-          // avatar={author.profileImage}
-          avatar=""
+          displayName={
+            author.name === 'Unnamed'
+              ? `${author.walletAddress.slice(
+                  0,
+                  4
+                )}...${author.walletAddress.slice(41)}`
+              : author.name
+          }
+          userName={`${author.walletAddress.slice(
+            0,
+            4
+          )}...${author.walletAddress.slice(41)}`}
+          text={tweet.tweet}
+          avatar={author.profileImage}
           timestamp={tweet.timestamp}
-          // isProfileImageNft={author.isProfileImageNft}
-          isProfileImageNft={true}
+          isProfileImageNft={author.isProfileImageNft}
         />
       ))}
     </div>

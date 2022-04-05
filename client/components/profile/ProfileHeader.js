@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
-// import { TwitterContext } from '../../context/TwitterContext'
+import { TwitterContext } from '../../context/TwitterContext'
 import { BsArrowLeftShort } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 // import Modal from 'react-modal'
 // import ProfileImageMinter from './mintingModal/ProfileImageMinter'
-// import { customStyles } from '../../lib/constants'
+import { customStyles } from '../../lib/constants'
 
 // Modal.setAppElement('#__next')
 
@@ -27,8 +27,21 @@ const style = {
 
 const ProfileHeader = () => {
   const router = useRouter()
+  const { currentAccount, currentUser } = useContext(TwitterContext)
+  const [userData, setUserData] = useState({})
 
-  const isProfileImageNft = false
+  useEffect(() => {
+    if (!currentUser) return
+
+    setUserData({
+      name: currentUser.name,
+      profileImage: currentUser.profileImage,
+      walletAddress: currentUser.walletAddress,
+      coverImage: currentUser.coverImage,
+      tweets: currentUser.tweets,
+      isProfileImageNft: currentUser.isProfileImageNft,
+    })
+  }, [currentUser])
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
@@ -36,50 +49,46 @@ const ProfileHeader = () => {
           <BsArrowLeftShort />
         </div>
         <div className={style.details}>
-          <div className={style.primary}>{/* {userData.name} */}</div>
+          <div className={style.primary}> {userData.name}</div>
           <div className={style.secondary}>
-            {/* {userData.tweets?.length} Tweets */}
+            {userData.tweets?.length} Tweets
           </div>
         </div>
       </div>
       <div className={style.coverPhotoContainer}>
         <img
-          // src={userData.coverImage}
-          src=""
+          src={userData.coverImage}
           alt="cover"
           className={style.coverPhoto}
         />
       </div>
       <div className={style.profileImageContainer}>
         <div
-          // className={
-          //   currentUser.isProfileImageNft ? 'hex' : style.profileImageContainer
-          // }
-          className={isProfileImageNft ? 'hex' : style.profileImageContainer}
+          className={
+            currentUser.isProfileImageNft ? 'hex' : style.profileImageContainer
+          }
         >
           <img
-            // src={userData.profileImage}
-            // alt={userData.walletAddress}
-            // className={
-            //   currentUser.isProfileImageNft
-            //     ? style.profileImageNft
-            //     : style.profileImage
-            // }
-            src=""
-            alt=""
+            src={userData.profileImage}
+            alt={userData.walletAddress}
+            className={
+              currentUser.isProfileImageNft
+                ? style.profileImageNft
+                : style.profileImage
+            }
           />
         </div>
       </div>
       <div className={style.details}>
         <div>
-          <div className={style.primary}>{/* {currentUser.name} */}</div>
+          <div className={style.primary}> {currentUser.name}</div>
         </div>
         <div className={style.secondary}>
-          {/* {currentAccount && (
+          {currentAccount && (
             <>
               @{currentAccount.slice(0, 8)}...{currentAccount.slice(37)}
             </>
-          )} */}
+          )}
         </div>
       </div>
       <div className={style.nav}>
